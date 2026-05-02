@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/NewShowsInTown.Api/NewShowsInTown.Api.csproj" />
+    <Project Path="src/NewShowsInTown.Shared/NewShowsInTown.Shared.csproj" />
     <Project Path="src/NewShowsInTown.Web/NewShowsInTown.Web.csproj" />
   </Folder>
 </Solution>

@@ -13,4 +13,8 @@
     <PackageReference Include="MudBlazor" Version="9.*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NewShowsInTown.Shared\NewShowsInTown.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
