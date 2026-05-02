@@ -1,0 +1,36 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "API",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/NewShowsInTown.Api/bin/Debug/net10.0/NewShowsInTown.Api.dll",
+      "cwd": "${workspaceFolder}/src/NewShowsInTown.Api",
+      "preLaunchTask": "build-api",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    {
+      "name": "Web",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/NewShowsInTown.Web/bin/Debug/net10.0/NewShowsInTown.Web.dll",
+      "cwd": "${workspaceFolder}/src/NewShowsInTown.Web",
+      "preLaunchTask": "build-web",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Stack",
+      "configurations": [
+        "API",
+        "Web"
+      ]
+    }
+  ]
+}
