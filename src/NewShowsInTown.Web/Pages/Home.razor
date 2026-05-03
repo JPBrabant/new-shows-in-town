@@ -1,14 +1,42 @@
 @page "/"
+@using NewShowsInTown.Shared.Models
+@inject HttpClient Http
 
 <PageTitle>Home</PageTitle>
 
-<MudText Typo="Typo.h3" GutterBottom="true">Hello, world!</MudText>
-<MudText Class="mb-8">Welcome to your new app, powered by MudBlazor and the .NET 10 Template!</MudText>
+<div class="pa-4">
+    <h1>Venues</h1>
 
+    @if (venues == null)
+    {
+        <MudProgressLinear Indeterminate="true" />
+    }
+    else if (venues.Count == 0)
+    {
+        <MudAlert Severity="Severity.Info">No venues found</MudAlert>
+    }
+    else
+    {
+        <MudTable Items="venues" Hover="true" Striped="true">
+            <HeaderContent>
+                <MudTh>Id</MudTh>
+                <MudTh>Name</MudTh>
+                <MudTh>Address</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Id">@context.Id</MudTd>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Address">@context.Address</MudTd>
+            </RowTemplate>
+        </MudTable>
+    }
+</div>
 
-<MudAlert Severity="Severity.Normal" ContentAlignment="HorizontalAlignment.Start">
-    You can find documentation and examples on our website here:
-    <MudLink Href="https://mudblazor.com" Target="_blank" Typo="Typo.body2" Color="Color.Primary">
-        <b>www.mudblazor.com</b>
-    </MudLink>
-</MudAlert>
+@code {
+    private List<Venue>? venues;
+
+    protected override async Task OnInitializedAsync()
+    {
+        venues = await Http.GetFromJsonAsync<List<Venue>>("/venues");
+    }
+}
