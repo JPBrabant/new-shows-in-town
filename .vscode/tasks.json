@@ -18,6 +18,19 @@
         "src/NewShowsInTown.Web/NewShowsInTown.Web.csproj"
       ],
       "type": "process"
+    },
+    {
+      "label": "run-scraper-salle-andre-mathieu",
+      "command": "uv",
+      "args": [
+        "run",
+        "--project", "src/NewShowsInTown.Scraper.SalleAndreMathieu",
+        "src/NewShowsInTown.Scraper.SalleAndreMathieu/main.py"
+      ],
+      "type": "process",
+      "problemMatcher": [
+        "$python"
+      ]
     }
   ]
 }
