@@ -293,5 +293,5 @@ __marimo__/
 ###############################################################################
 
 
-appsettings.json
 appsettings.Development.json
+*.http
