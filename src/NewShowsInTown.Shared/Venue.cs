@@ -2,7 +2,10 @@
 
 public class Venue
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string Address { get; set; } = string.Empty;
+    public int             Id             { get; set; }
+    public required string Name           { get; set; }
+    public required string StreetAddress  { get; set; }
+    public required string City           { get; set; }
+    public required string PostalCode     { get; set; }
+    public required string Province       { get; set; }
 }
