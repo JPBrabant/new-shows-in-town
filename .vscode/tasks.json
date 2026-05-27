@@ -20,11 +20,23 @@
       "type": "process"
     },
     {
+      "label": "run-web",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "src/NewShowsInTown.Web/NewShowsInTown.Web.csproj"
+      ],
+      "type": "process",
+      "isBackground": true
+    },
+    {
       "label": "run-scraper-salle-andre-mathieu",
       "command": "uv",
       "args": [
         "run",
-        "--project", "src/NewShowsInTown.Scraper.SalleAndreMathieu",
+        "--project",
+        "src/NewShowsInTown.Scraper.SalleAndreMathieu",
         "src/NewShowsInTown.Scraper.SalleAndreMathieu/main.py"
       ],
       "type": "process",

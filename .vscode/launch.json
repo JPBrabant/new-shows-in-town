@@ -11,26 +11,13 @@
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-    },
-    {
-      "name": "Web",
-      "type": "coreclr",
-      "request": "launch",
-      "program": "${workspaceFolder}/src/NewShowsInTown.Web/bin/Debug/net10.0/NewShowsInTown.Web.dll",
-      "cwd": "${workspaceFolder}/src/NewShowsInTown.Web",
-      "preLaunchTask": "build-web",
-      "env": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
     }
   ],
   "compounds": [
     {
       "name": "Full Stack",
-      "configurations": [
-        "API",
-        "Web"
-      ]
+      "configurations": ["API"],
+      "preLaunchTask": "run-web"
     }
   ]
 }
