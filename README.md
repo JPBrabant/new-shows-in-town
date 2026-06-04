@@ -24,3 +24,6 @@ Fetch all shows and movies from
     ```
 - Cineplex
     - TODO
+- Bordel Comédie + Club
+    - TODO
+- OVMF
