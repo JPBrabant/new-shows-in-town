@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using NewShowsInTown.Api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/venues", async (AppDbContext db) =>
-    await db.Venues.ToListAsync());
+app.MapVenueEndpoints();
+app.MapShowEndpoints();
 
 app.Run();
