@@ -43,6 +43,35 @@
       "problemMatcher": [
         "$python"
       ]
+    },
+    {
+      "label": "export-requirements",
+      "command": "uv",
+      "args": [
+        "export",
+        "--project",
+        "src/NewShowsInTown.Scraper.SalleAndreMathieu",
+        "--format",
+        "requirements-txt",
+        "--output-file",
+        "src/NewShowsInTown.Scraper.SalleAndreMathieu/requirements.txt"
+      ],
+      "type": "process",
+      "problemMatcher": []
+    },
+    {
+      "label": "run-function-salle-andre-mathieu",
+      "dependsOn": ["export-requirements"],
+      "command": "func",
+      "args": [
+        "start"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/src/NewShowsInTown.Scraper.SalleAndreMathieu"
+      },
+      "type": "process",
+      "isBackground": true,
+      "problemMatcher": []
     }
   ]
 }

@@ -296,3 +296,5 @@ __marimo__/
 appsettings.Development.json
 *.http
 publish/
+# Generated from pyproject.toml by uv export
+src/**/requirements.txt
