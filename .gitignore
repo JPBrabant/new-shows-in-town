@@ -295,3 +295,4 @@ __marimo__/
 
 appsettings.Development.json
 *.http
+publish/
