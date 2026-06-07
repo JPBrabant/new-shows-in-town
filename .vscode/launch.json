@@ -9,15 +9,24 @@
       "cwd": "${workspaceFolder}/src/NewShowsInTown.Api",
       "preLaunchTask": "build-api",
       "env": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:7001"
       }
+    },
+    {
+      "name": "Web (browser)",
+      "type": "msedge",
+      "request": "launch",
+      "url": "https://localhost:5000",
+      "webRoot": "${workspaceFolder}/src/NewShowsInTown.Web"
     }
   ],
   "compounds": [
     {
       "name": "Full Stack",
-      "configurations": ["API"],
-      "preLaunchTask": "run-web"
+      "configurations": ["API", "Web (browser)"],
+      "preLaunchTask": "run-web",
+      "stopAll": true
     }
   ]
 }

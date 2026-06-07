@@ -28,7 +28,8 @@
         "src/NewShowsInTown.Web/NewShowsInTown.Web.csproj"
       ],
       "type": "process",
-      "isBackground": true
+      "isBackground": true,
+      "problemMatcher": []
     },
     {
       "label": "run-scraper-salle-andre-mathieu",
