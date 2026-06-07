@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using NewShowsInTown.Api.Dtos;
+using NewShowsInTown.Shared.Dtos;
 
 namespace NewShowsInTown.Api.Endpoints;
 

@@ -1,4 +1,4 @@
-namespace NewShowsInTown.Api.Dtos;
+namespace NewShowsInTown.Shared.Dtos;
 
 public record ShowSummaryDto(
     int Id,

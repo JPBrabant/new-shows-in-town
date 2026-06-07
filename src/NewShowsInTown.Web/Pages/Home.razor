@@ -1,5 +1,5 @@
 @page "/"
-@using NewShowsInTown.Shared.Models
+@using NewShowsInTown.Shared.Dtos
 @inject HttpClient Http
 
 <PageTitle>Home</PageTitle>
@@ -21,25 +21,20 @@
             <HeaderContent>
                 <MudTh>Id</MudTh>
                 <MudTh>Name</MudTh>
-                <MudTh>Address</MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Id">@context.Id</MudTd>
                 <MudTd DataLabel="Name">@context.Name</MudTd>
-                <MudTd DataLabel="Address">@context.Province</MudTd>
-                <MudTd DataLabel="Address">@context.City</MudTd>
-                <MudTd DataLabel="Address">@context.StreetAddress</MudTd>
-                <MudTd DataLabel="Address">@context.PostalCode</MudTd>
             </RowTemplate>
         </MudTable>
     }
 </div>
 
 @code {
-    private List<Venue>? venues;
+    private List<VenueDto>? venues;
 
     protected override async Task OnInitializedAsync()
     {
-        venues = await Http.GetFromJsonAsync<List<Venue>>("/venues");
+        venues = await Http.GetFromJsonAsync<List<VenueDto>>("/venues");
     }
 }

@@ -1,6 +1,6 @@
-namespace NewShowsInTown.Api.Dtos;
+namespace NewShowsInTown.Shared.Dtos;
 
-public record CreateShowDto(
+public record UpdateShowDto(
     string Title,
     string Language,
     int VenueId,
@@ -11,5 +11,3 @@ public record CreateShowDto(
     string? Category,
     List<CreateShowTimeDto> ShowTimes
 );
-
-public record CreateShowTimeDto(DateTime StartsAt);
