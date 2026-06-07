@@ -10,6 +10,11 @@
       "preLaunchTask": "build-api",
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "serverReadyAction": {
+        "action": "openExternally",
+        "uriFormat": "https://localhost:5000",
+        "pattern": "Now listening on"
       }
     }
   ],
@@ -17,7 +22,8 @@
     {
       "name": "Full Stack",
       "configurations": ["API"],
-      "preLaunchTask": "run-web"
+      "preLaunchTask": "run-web",
+      "stopAll": true
     }
   ]
 }
