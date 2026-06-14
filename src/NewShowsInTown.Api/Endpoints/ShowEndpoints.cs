@@ -25,6 +25,9 @@ public static class ShowEndpoints
 
         group.MapDelete("/{id:int}", DeleteShow)
             .WithName("DeleteShow");
+
+        group.MapPost("/upsert", UpsertShow)
+            .WithName("UpsertShow");
     }
 
     private static async Task<IResult> GetAllShows(AppDbContext db, int? venueId = null)
@@ -156,6 +159,69 @@ public static class ShowEndpoints
         await db.SaveChangesAsync();
 
         return Results.NoContent();
+    }
+
+    private static async Task<IResult> UpsertShow(AppDbContext db, CreateShowDto dto)
+    {
+        var venueExists = await db.Venues.AnyAsync(v => v.Id == dto.VenueId);
+        if (!venueExists)
+            return Results.BadRequest(new { Error = $"Venue with Id {dto.VenueId} not found." });
+
+        // Match by title + venue — fallback for scrapers without external IDs
+        var existing = await db.Shows
+            .Include(s => s.ShowTimes)
+            .FirstOrDefaultAsync(s => s.Title == dto.Title && s.VenueId == dto.VenueId);
+
+        if (existing is not null)
+        {
+            // Update
+            existing.Title       = dto.Title;
+            existing.Language    = dto.Language;
+            existing.Subtitle    = dto.Subtitle;
+            existing.Description = dto.Description;
+            existing.ImageUrl    = dto.ImageUrl;
+            existing.EventUrl    = dto.EventUrl;
+            existing.Category    = dto.Category;
+
+            db.ShowTimes.RemoveRange(existing.ShowTimes);
+            existing.ShowTimes = dto.ShowTimes.Select(st => new ShowTime
+            {
+                StartsAt = st.StartsAt,
+                Show     = null!
+            }).ToList();
+
+            await db.SaveChangesAsync();
+            await db.Entry(existing).Reference(s => s.Venue).LoadAsync();
+
+            var updated = MapToDetailDto(existing);
+            return Results.Ok(updated);
+        }
+
+        // Insert
+        var show = new Show
+        {
+            Title       = dto.Title,
+            Language    = dto.Language,
+            Subtitle    = dto.Subtitle,
+            Description = dto.Description,
+            ImageUrl    = dto.ImageUrl,
+            EventUrl    = dto.EventUrl,
+            Category    = dto.Category,
+            VenueId     = dto.VenueId,
+            Venue       = null!,
+            ShowTimes   = dto.ShowTimes.Select(st => new ShowTime
+            {
+                StartsAt = st.StartsAt,
+                Show     = null!
+            }).ToList()
+        };
+
+        db.Shows.Add(show);
+        await db.SaveChangesAsync();
+        await db.Entry(show).Reference(s => s.Venue).LoadAsync();
+
+        var created = MapToDetailDto(show);
+        return Results.Created($"/shows/{show.Id}", created);
     }
 
     private static ShowDetailDto MapToDetailDto(Show show)
