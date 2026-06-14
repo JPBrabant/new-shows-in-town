@@ -8,7 +8,7 @@ import os
 
 import azure.functions as func
 
-from main import scrape_shows
+from main import scrape_shows, sync_to_api
 
 app = func.FunctionApp()
 API_BASE = os.environ.get("NEWSHOWS_API_BASE", "https://localhost:5001")
@@ -29,6 +29,12 @@ def scrape_salle_andre_mathieu(timer: func.TimerRequest) -> None:
         logging.exception("Scraping failed")
         raise
 
-    # TODO: POST/PUT shows to the API
-    for show in shows:
-        logging.debug("Show: %s — %s", show["title"], show["date"])
+    try:
+        result = sync_to_api(shows)
+        logging.info(
+            "Sync complete: %d created, %d updated, %d failed",
+            result["created"], result["updated"], result["failed"],
+        )
+    except Exception:
+        logging.exception("API sync failed")
+        raise
